@@ -20,7 +20,7 @@ class _HomepageState extends State<Homepage> {
     return Stack(
 
       children:[
-        Image.asset('assets/images/default_bg2x.png',
+        Image.asset('assets/images/2x/default.png',
     width:double.infinity,
       height:double.infinity,
       fit:BoxFit.fill,
@@ -34,6 +34,7 @@ class _HomepageState extends State<Homepage> {
             ), ),
         backgroundColor:Colors.transparent,
     ),
+        backgroundColor: Colors.transparent,
         bottomNavigationBar:
         Theme(
           data:Theme.of(context).copyWith(
@@ -46,40 +47,39 @@ class _HomepageState extends State<Homepage> {
 
               });
             },
-            currentIndex: 2 ,
+            currentIndex: currentPage ,
     selectedItemColor: MythemeData.selectedIcnColor,
           unselectedItemColor: MythemeData.unselectedIcnColor,
           backgroundColor: MythemeData.primaryColor,
           items:[
             BottomNavigationBarItem(
               label:'quran',
-                icon:Image.asset('assets/images/icon_quran@2x.png',width: 48,)),
+                icon:Image.asset('assets/images/2x/icon_quran@2x.png',width: 36,)),
             BottomNavigationBarItem(
                 label:'sebha',
-                icon:Image.asset('assets/images/icon_sebha2x.png')),
+                icon:Image.asset('assets/images/2x/icon_sebha2x.png',width: 36,)),
             BottomNavigationBarItem(
               label:'radio',
-                icon:Image.asset('assets/images/icon_radio2x.png')),
+                icon:Image.asset('assets/images/2x/icon_radio2x.png',width:36)),
             BottomNavigationBarItem(
               label:'hadeth',
-                icon:Image.asset('assets/imagesicon_hadeth@2x.png')),
+                icon:Image.asset('assets/images/2x/icon_hadeth@2x.png',width:36)),
           ],
           ),
         ),
-        body:getCurrentPage(),
+        body:Container(child: getCurrentPage()),
         ),
   ],  );
   }
 
-  getCurrentPage(){
+ Widget getCurrentPage(){
 if(currentPage==0){
-  return qurantab();
+  return qurantap();
 }else if (currentPage==1){
   return sebhatap();
 }else if(currentPage==2){
   return radiotap();
-}else if(currentPage==3){
+}else
   return hadethtap();
-}
 }
 }

@@ -8,7 +8,7 @@ class suraNameItems extends StatelessWidget{
   suraNameItems(this.suraName,this.suraIndex);
   @override
   Widget build(BuildContext context) {
-   return  InkWell(
+   return  InkWell(//3lshan lma ados 3la el button//
      onTap: (){
        Navigator.pushNamed(context, suraDetailscreen.routeName,
        arguments:suraDetailArg(suraName,suraIndex)
@@ -19,7 +19,7 @@ class suraNameItems extends StatelessWidget{
        children: [
          Padding(
            padding: const EdgeInsets.all(8.0),
-           child: Text('${suraName}',style: TextStyle(fontSize: 24),
+           child: Text('${suraName}',style: TextStyle(fontSize: 20),
            ),
          ),
        ],
