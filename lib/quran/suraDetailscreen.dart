@@ -28,6 +28,7 @@ class _suraDetailscreenState extends State<suraDetailscreen> {
     ),
     Scaffold(
     appBar: AppBar(
+      iconTheme: IconThemeData(color: MythemeData.colorBlack),
     elevation: 0,
     centerTitle: true,
     title: Text('${args.suraName}',style: TextStyle(fontSize: 38,
