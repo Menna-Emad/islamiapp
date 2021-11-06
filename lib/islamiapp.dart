@@ -80,6 +80,6 @@ if(currentPage==0){
 }else if(currentPage==2){
   return radiotap();
 }else
-  return hadethtap();
+  return HadethTap();
 }
 }

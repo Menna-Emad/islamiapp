@@ -4,75 +4,62 @@ import 'package:untitled/hadeth/elhadethtitle.dart';
 
 import '../main.dart';
 
-class hadethtap extends StatefulWidget {
+class HadethTap extends StatefulWidget{
   @override
-  _hadethtapState createState() => _hadethtapState();
+  _HadethTapState createState() => _HadethTapState();
 }
 
-class _hadethtapState extends State<hadethtap> {
-  List<Hadeth>AllAhadeth = [];
-
+class _HadethTapState extends State<HadethTap> {
   @override
   Widget build(BuildContext context) {
-    hadethContent();
+    if(allHadeth.isEmpty)
+    loadHadethFile();
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Expanded(
-          flex: 1,
-          child:
-          Image.asset(('assets/images/2x/hadeth_logo2x.png')),
-
-        ),
-        Container(
-          height: 1,
-          width: double.infinity,
-          color: MythemeData.primaryColor,
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text('Elhadeth', style: TextStyle(fontSize: 27),
-          ),), Divider(color: MythemeData.primaryColor, thickness: 3,),
+       Expanded(child:  Image.asset('assets/images/2x/hadeth_logo2x.png')),
         Expanded(
           flex: 3,
-          child: ListView.separated(
-              separatorBuilder: (buildContext, index) {
-                return Container(
-                  height: 1,
-                  margin: EdgeInsets.symmetric(horizontal: 12),
-                  width: double.infinity,
-                  color: MythemeData.primaryColor,
-                );
-              },
-              itemBuilder: (buildContext, index) {
-                return hadethtitle(
-                    AllAhadeth[index]);
-              },
-              itemCount: AllAhadeth.length),)
-      ],);
+            child: Container(
+          child: allHadeth.isEmpty?Center(child: CircularProgressIndicator()):
+          ListView.separated(itemBuilder:(buildContext,index){
+            return hadethtitle(allHadeth[index]);
+    },
+            separatorBuilder: (buildContext,index){
+              return  Container(
+                height:1,
+                margin: EdgeInsets.symmetric(horizontal:12),
+                width: double.infinity,
+                color: MythemeData.primaryColor,
+              );
+            },
+    itemCount: allHadeth.length,)
+        ))
+
+      ],
+    );
+  }
+
+  List<Hadeth>allHadeth=[];
+
+  void loadHadethFile()async{
+    for(int i=1;i<=50;i++){
+      String fileContent=await rootBundle.loadString('assets/ahadeth/h$i');
+    List<String>lines=fileContent.split('/n');
+    String title=lines[0];
+    String content='';
+    for(int j=1;j<lines.length;j++){
+      content+=lines[j];
+    }
+    var h =Hadeth(title,content);
+    allHadeth.add(h);
+    }
+    setState(() {
+
+    });
   }
 }
-
-  void hadethContent()async {
-    String Allahadeth = await rootBundle.loadString('assets/content/');
-    List<String>Allahadethlist = Allahadeth.split('#/r/n');
-    List<Hadeth>listahadeth=[];
-    for (int i = 0; i < Allahadethlist.length; i++)
-      {
-        String hadeth=Allahadethlist[i];
-      List<String>singlehadeth=  hadeth.split('/n');
-      String titles=singlehadeth[0];
-      listahadeth.add(Hadeth(titles, singlehadeth));
-  }
-    Allahadethlist=listahadeth.cast<String>();
-
-
-
-}
-
 class Hadeth{
   String title;
-  List<String>hadethContent;
-  Hadeth(this.title,this.hadethContent);
-
+  String content;
+  Hadeth(this.title,this.content);
 }

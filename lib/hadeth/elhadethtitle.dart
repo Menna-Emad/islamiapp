@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/hadeth/hadethDetails.dart';
 
 import 'hadthtap.dart';
 
@@ -7,14 +8,22 @@ class hadethtitle extends StatelessWidget{
   hadethtitle(this.hadeth);
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return  InkWell(//3lshan lma ados 3la el button//
       onTap: (){
-        },
-   child: Container(
-     padding: EdgeInsets.all(8),
-     child: Text(hadeth.title,textAlign: TextAlign.center,style: TextStyle(fontSize: 25),),
-   ),
-
+        Navigator.pushNamed(context, HadethDetails.routeName);
+            arguments:Hadeth()
+        );
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(hadeth.title,style: TextStyle(fontSize: 20),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
